@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web3 & Crypto Unit Converter (Wei, Gwei, Eth, Matic) - SmartToolHub</title>
+  <meta name="description" content="Instant client-side Ethereum and Polygon unit conversion between Wei, Gwei, and Ether.">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans">
+  <header class="border-b border-slate-800 bg-slate-950 py-4 px-6">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <a href="../index.html" class="text-cyan-400 hover:text-cyan-300 font-semibold text-sm">← Back to Tools</a>
+      <span class="text-xs text-slate-400">Web3 Converter</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-10 flex-1 w-full">
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">🪙 Web3 Unit Converter</h1>
+    <p class="text-slate-400 text-sm mb-6">Convert units in real-time across Wei, Gwei, and Ether/MATIC.</p>
+
+    <!-- Ad Slot -->
+    <div class="w-full bg-slate-800/40 border border-dashed border-slate-700 rounded-lg p-2.5 my-4 text-center text-xs text-slate-500">
+      <span>[Advertisement Slot - Header]</span>
+    </div>
+
+    <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-6 space-y-4">
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1">Wei (10⁰)</label>
+        <input type="text" id="wei" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-cyan-400 focus:outline-none focus:border-cyan-500 font-mono" placeholder="1000000000000000000">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1">Gwei (10⁹)</label>
+        <input type="text" id="gwei" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-cyan-400 focus:outline-none focus:border-cyan-500 font-mono" placeholder="1000000000">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1">Ether / MATIC (10¹⁸)</label>
+        <input type="text" id="ether" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-cyan-400 focus:outline-none focus:border-cyan-500 font-mono" placeholder="1.0">
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const weiInput = document.getElementById('wei');
+    const gweiInput = document.getElementById('gwei');
+    const etherInput = document.getElementById('ether');
+
+    function updateFromEther(val) {
+      if (!val || isNaN(val)) return;
+      try {
+        const num = parseFloat(val);
+        gweiInput.value = (num * 1e9).toString();
+        weiInput.value = (BigInt(Math.floor(num * 1e18))).toString();
+      } catch (_) {}
+    }
+
+    etherInput.addEventListener('input', (e) => updateFromEther(e.target.value));
+    updateFromEther(1.0);
+  </script>
+</body>
+</html>
